@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+// #!/usr/bin/env node
 
 import { Command } from "commander";
 import path, { dirname } from "path";
@@ -25,7 +25,7 @@ program
         type: "text",
         name: "name",
         message: "Project Name: ",
-        validate: (name: string) => (name ? true : "Project name is required"),
+        validate: (name) => (name ? true : "Project name is required"),
       });
       projectName = response.name;
     }
@@ -36,7 +36,7 @@ program
       process.exit(1);
     }
 
-    const templateDir = path.join(__dirname, "..", "template");
+    const templateDir = path.join(__dirname, "../../template");
 
     const { useTailwind } = await prompts({
       type: "confirm",
@@ -45,19 +45,19 @@ program
       initial: true,
     });
 
-    const { generateTact } = await prompts({
-      type: "confirm",
-      name: "generateTact",
-      message: "Do you want to generate Tact smart contract files?",
-      initial: true,
-    });
+    // const { generateTact } = await prompts({
+    //   type: "confirm",
+    //   name: "generateTact",
+    //   message: "Do you want to generate Tact smart contract files?",
+    //   initial: true,
+    // });
 
-    const { generateSolidity } = await prompts({
-      type: "confirm",
-      name: "generateSolidity",
-      message: "Do you want to generate Solidity smart contract files?",
-      initial: true,
-    });
+    // const { generateSolidity } = await prompts({
+    //   type: "confirm",
+    //   name: "generateSolidity",
+    //   message: "Do you want to generate Solidity smart contract files?",
+    //   initial: true,
+    // });
 
     try {
       console.log("Generating project");

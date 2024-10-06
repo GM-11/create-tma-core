@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+// #!/usr/bin/env node
 import { Command } from "commander";
 import path, { dirname } from "path";
 const program = new Command();
@@ -29,7 +29,7 @@ program
         console.log(`Error: Directory ${projectName} already exists.`);
         process.exit(1);
     }
-    const templateDir = path.join(__dirname, "..", "template");
+    const templateDir = path.join(__dirname, "../../template");
     const { useTailwind } = await prompts({
         type: "confirm",
         name: "useTailwind",
