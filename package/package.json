@@ -1,5 +1,5 @@
 {
-  "name": "toncore",
+  "name": "create-coreton-app",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "scripts": {
@@ -28,6 +28,6 @@
     "prompts": "^2.4.2"
   },
   "bin": {
-    "create-toncore-app": "./src/index.js"
+    "create-coreton-app": "./src/index.js"
   }
 }
