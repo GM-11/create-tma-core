@@ -7,6 +7,7 @@ import * as fs from "fs-extra";
 import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 import setupTailwind from "../utils/setupTailwind.js";
+import setupTact from "../utils/setupTact.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 program
@@ -42,12 +43,12 @@ program
         message: "Do you want to generate Tact smart contract files?",
         initial: true,
     });
-    const { generateSolidity } = await prompts({
-        type: "confirm",
-        name: "generateSolidity",
-        message: "Do you want to generate Solidity smart contract files?",
-        initial: true,
-    });
+    // const { generateSolidity } = await prompts({
+    //   type: "confirm",
+    //   name: "generateSolidity",
+    //   message: "Do you want to generate Solidity smart contract files?",
+    //   initial: true,
+    // });
     try {
         console.log("Generating project");
         await fs.copy(templateDir, targetDir);
@@ -62,6 +63,9 @@ program
         execSync("npm install", { stdio: "inherit" });
         if (useTailwind) {
             await setupTailwind(targetDir); // Call the Tailwind setup function
+        }
+        if (generateTact) {
+            await setupTact(targetDir, projectName); // Call the Tact setup function
         }
     }
     catch (error) {

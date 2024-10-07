@@ -1,21 +1,19 @@
-function App() {
+import React, { useState } from 'react';
+
+const App: React.FC = () => {
+  const [counter, setCounter] = useState<number>(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <h1 className="title">TON + CORE</h1>
+
+      <button className="increment-button" onClick={() => setCounter(counter + 1)}>
+        Increment
+      </button>
+
+      <p className="counter-display">{counter}</p>
     </div>
   );
-}
+};
 
 export default App;

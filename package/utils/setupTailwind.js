@@ -1,6 +1,7 @@
 import fs from "fs-extra";
-import path from "path";
+import path, { dirname } from "path";
 import { execSync } from "child_process";
+import { fileURLToPath } from "url";
 async function setupTailwind(targetDir) {
     console.log("Setting up Tailwind CSS...");
     // Install Tailwind CSS and related packages
@@ -20,6 +21,10 @@ async function setupTailwind(targetDir) {
 @tailwind components;
 @tailwind utilities;
 `;
-    await fs.writeFile(cssPath, tailwindDirectives.trim() + "\n"); // Append Tailwind directives to the CSS file
+    await fs.writeFile(cssPath, tailwindDirectives.trim() + "\n");
+    //rewrite App.tsx, copy AppWithTailwind.tsx from fileTemplates and replace App.tsx with it
+    const appPath = path.join(targetDir, "src/App.tsx");
+    const appWithTailwindPath = path.join(dirname(fileURLToPath(import.meta.url)), "../fileTemplates/AppWithTailwind.tsx");
+    await fs.copy(appWithTailwindPath, appPath);
 }
 export default setupTailwind;

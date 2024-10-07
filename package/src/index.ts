@@ -5,11 +5,12 @@ import path, { dirname } from "path";
 const program = new Command();
 import prompts from "prompts";
 import * as fs from "fs-extra";
-import { execSync } from "child_process";
+import { exec, execSync } from "child_process";
 
 import { fileURLToPath } from "url";
 
 import setupTailwind from "../utils/setupTailwind.js";
+import setupTact from "../utils/setupTact.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -45,12 +46,12 @@ program
       initial: true,
     });
 
-    // const { generateTact } = await prompts({
-    //   type: "confirm",
-    //   name: "generateTact",
-    //   message: "Do you want to generate Tact smart contract files?",
-    //   initial: true,
-    // });
+    const { generateTact } = await prompts({
+      type: "confirm",
+      name: "generateTact",
+      message: "Do you want to generate Tact smart contract files?",
+      initial: true,
+    });
 
     // const { generateSolidity } = await prompts({
     //   type: "confirm",
@@ -76,6 +77,10 @@ program
 
       if (useTailwind) {
         await setupTailwind(targetDir); // Call the Tailwind setup function
+      }
+
+      if (generateTact) {
+        await setupTact(targetDir, projectName); // Call the Tact setup function
       }
     } catch (error) {
       console.log(`Error: ${error}`);
