@@ -11,6 +11,7 @@ import { fileURLToPath } from "url";
 
 import setupTailwind from "../utils/setupTailwind.js";
 import setupTact from "../utils/setupTact.js";
+import setupSolidity from "../utils/setupSolidity.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -53,12 +54,12 @@ program
       initial: true,
     });
 
-    // const { generateSolidity } = await prompts({
-    //   type: "confirm",
-    //   name: "generateSolidity",
-    //   message: "Do you want to generate Solidity smart contract files?",
-    //   initial: true,
-    // });
+    const { generateSolidity } = await prompts({
+      type: "confirm",
+      name: "generateSolidity",
+      message: "Do you want to generate Solidity smart contract files?",
+      initial: true,
+    });
 
     try {
       console.log("Generating project");
@@ -82,6 +83,11 @@ program
       if (generateTact) {
         await setupTact(targetDir, projectName); // Call the Tact setup function
       }
+
+      if (generateSolidity) {
+        await setupSolidity(targetDir, projectName);
+      }
+
     } catch (error) {
       console.log(`Error: ${error}`);
       process.exit(1);
