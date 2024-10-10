@@ -4,10 +4,14 @@ import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 async function setupTailwind(targetDir) {
     console.log("Setting up Tailwind CSS...");
-    // Install Tailwind CSS and related packages
-    execSync("npm install -D tailwindcss postcss autoprefixer", {
-        stdio: "inherit",
-    });
+    try {
+        execSync("npm install", { stdio: "inherit" });
+        console.log("Setup Tailwind complete");
+    }
+    catch (error) {
+        console.error("Failed to install dependencies:", error);
+        process.exit(1);
+    }
     execSync("npx tailwindcss init -p", { stdio: "inherit" });
     // Update Tailwind config file
     const tailwindConfigPath = path.join(targetDir, "tailwind.config.js");

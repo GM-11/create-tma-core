@@ -3,12 +3,23 @@ import path, { dirname } from "path";
 import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 
-export default async function setupSolidity(targetDir: string, projectName: string) {
+export default async function setupSolidity(
+  targetDir: string,
+  projectName: string,
+) {
   console.log("Setting up Solidity contracts...");
 
-  execSync("npm install hardhat @nomicfoundation/hardhat-toolbox --save-dev", {
-    stdio: "inherit",
-  });
+  try {
+    execSync(
+      "npm install hardhat @nomicfoundation/hardhat-toolbox --save-dev",
+      { stdio: "inherit" },
+    );
+
+    console.log("Setup Hardhat configuration for solidity complete");
+  } catch (error) {
+    console.error("Failed to install dependencies:", error);
+    process.exit(1);
+  }
 
   await fs.mkdir(path.join(targetDir, "solidityContracts"));
   await fs.writeFile(

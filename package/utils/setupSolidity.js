@@ -4,9 +4,14 @@ import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 export default async function setupSolidity(targetDir, projectName) {
     console.log("Setting up Solidity contracts...");
-    execSync("npm install hardhat @nomicfoundation/hardhat-toolbox --save-dev", {
-        stdio: "inherit",
-    });
+    try {
+        execSync("npm install hardhat @nomicfoundation/hardhat-toolbox --save-dev", { stdio: "inherit" });
+        console.log("Setup Hardhat configuration for solidity complete");
+    }
+    catch (error) {
+        console.error("Failed to install dependencies:", error);
+        process.exit(1);
+    }
     await fs.mkdir(path.join(targetDir, "solidityContracts"));
     await fs.writeFile(path.join(targetDir, `solidityContracts/${projectName}.sol`), "");
     const solidityTemplatePath = path.join(dirname(fileURLToPath(import.meta.url)), "../fileTemplates/SolidityTemplate.sol");

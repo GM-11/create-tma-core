@@ -2,14 +2,20 @@ import fs from "fs-extra";
 import path, { dirname } from "path";
 import { execSync } from "child_process";
 import { fileURLToPath } from "url";
+import ProgressBar from "progress";
 
 async function setupTailwind(targetDir: string) {
   console.log("Setting up Tailwind CSS...");
 
-  // Install Tailwind CSS and related packages
-  execSync("npm install -D tailwindcss postcss autoprefixer", {
-    stdio: "inherit",
-  });
+  try {
+    execSync("npm install", { stdio: "inherit" });
+
+    console.log("Setup Tailwind complete");
+  } catch (error) {
+    console.error("Failed to install dependencies:", error);
+    process.exit(1);
+  }
+
   execSync("npx tailwindcss init -p", { stdio: "inherit" });
 
   // Update Tailwind config file
@@ -17,7 +23,7 @@ async function setupTailwind(targetDir: string) {
   const tailwindConfig = await fs.readFile(tailwindConfigPath, "utf-8");
   const updatedTailwindConfig = tailwindConfig.replace(
     /content: \[\]/,
-    `content: ['./src/**/*.{js,jsx,ts,tsx}']`
+    `content: ['./src/**/*.{js,jsx,ts,tsx}']`,
   );
   await fs.writeFile(tailwindConfigPath, updatedTailwindConfig);
 
@@ -34,7 +40,7 @@ async function setupTailwind(targetDir: string) {
   const appPath = path.join(targetDir, "src/App.tsx");
   const appWithTailwindPath = path.join(
     dirname(fileURLToPath(import.meta.url)),
-    "../fileTemplates/AppWithTailwind.tsx"
+    "../fileTemplates/AppWithTailwind.tsx",
   );
   await fs.copy(appWithTailwindPath, appPath);
 }
