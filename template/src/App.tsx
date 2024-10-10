@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
+import React from "react";
 
 const App: React.FC = () => {
-  const [counter, setCounter] = useState<number>(0);
-
   return (
     <div className="app-container">
       <h1 className="title">TON + CORE</h1>
 
-      <button className="increment-button" onClick={() => setCounter(counter + 1)}>
-        Increment
-      </button>
-
-      <p className="counter-display">{counter}</p>
+      <w3m-button />
     </div>
   );
 };
