@@ -11,7 +11,7 @@ import { fileURLToPath } from "url";
 
 import setupTailwind from "../utils/setupTailwind.js";
 import setupTact from "../utils/setupTact.js";
-import setupSolidity from "../utils/setupSolidity.js"
+import setupSolidity from "../utils/setupSolidity.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,7 +22,6 @@ program
   .argument("[project-name]", "Name of the new project")
   .action(async (projectName) => {
     if (!projectName) {
-      // Ask for project name if not provided
       const response = await prompts({
         type: "text",
         name: "name",
@@ -47,13 +46,6 @@ program
       initial: true,
     });
 
-    const { generateTact } = await prompts({
-      type: "confirm",
-      name: "generateTact",
-      message: "Do you want to generate Tact smart contract files?",
-      initial: true,
-    });
-
     const { generateSolidity } = await prompts({
       type: "confirm",
       name: "generateSolidity",
@@ -66,28 +58,19 @@ program
       await fs.copy(templateDir, targetDir);
       console.log("Project generated successfully");
 
-      // const packageJsonPath = path.join(targetDir, "package.json");
-      // console.log(packageJsonPath);
-      // const packageJson = await fs.readJSON(packageJsonPath);
-      // packageJson.name = projectName;
-      // await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
-
-      console.log("Installing dependencies...");
       process.chdir(targetDir);
-      execSync("npm install", { stdio: "inherit" });
-
       if (useTailwind) {
-        await setupTailwind(targetDir); // Call the Tailwind setup function
-      }
-
-      if (generateTact) {
-        await setupTact(targetDir, projectName); // Call the Tact setup function
+        await setupTailwind(targetDir);
       }
 
       if (generateSolidity) {
         await setupSolidity(targetDir, projectName);
       }
 
+      console.log("\nSetup complete\n");
+      console.log("Start your project with:");
+      console.log(`cd ${projectName}`);
+      console.log("npm run dev");
     } catch (error) {
       console.log(`Error: ${error}`);
       process.exit(1);

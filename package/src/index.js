@@ -4,10 +4,8 @@ import path, { dirname } from "path";
 const program = new Command();
 import prompts from "prompts";
 import * as fs from "fs-extra";
-import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 import setupTailwind from "../utils/setupTailwind.js";
-import setupTact from "../utils/setupTact.js";
 import setupSolidity from "../utils/setupSolidity.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -38,12 +36,6 @@ program
         message: "Do you want to use Tailwind CSS?",
         initial: true,
     });
-    const { generateTact } = await prompts({
-        type: "confirm",
-        name: "generateTact",
-        message: "Do you want to generate Tact smart contract files?",
-        initial: true,
-    });
     const { generateSolidity } = await prompts({
         type: "confirm",
         name: "generateSolidity",
@@ -59,14 +51,16 @@ program
         // const packageJson = await fs.readJSON(packageJsonPath);
         // packageJson.name = projectName;
         // await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
-        console.log("Installing dependencies...");
         process.chdir(targetDir);
-        execSync("npm install", { stdio: "inherit" });
+        // console.log("Installing dependencies...");
+        // try {
+        //   execSync("npm install", { stdio: "ignore" });
+        // } catch (error) {
+        //   console.error("Failed to install dependencies:", error);
+        //   process.exit(1);
+        // }
         if (useTailwind) {
             await setupTailwind(targetDir); // Call the Tailwind setup function
-        }
-        if (generateTact) {
-            await setupTact(targetDir, projectName); // Call the Tact setup function
         }
         if (generateSolidity) {
             await setupSolidity(targetDir, projectName);
