@@ -45,13 +45,6 @@ program
       initial: true,
     });
 
-    const { generateSolidity } = await prompts({
-      type: "confirm",
-      name: "generateSolidity",
-      message: "Do you want to generate Solidity smart contract files?",
-      initial: true,
-    });
-
     try {
       console.log("Generating project");
       await fs.copy(templateDir, targetDir);
@@ -62,9 +55,7 @@ program
         await setupTailwind(targetDir);
       }
 
-      if (generateSolidity) {
-        await setupSolidity(targetDir, projectName);
-      }
+      await setupSolidity(targetDir, projectName);
 
       console.log("\nSetup complete\n");
       console.log("Start your project with:");
