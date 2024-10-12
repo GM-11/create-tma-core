@@ -5,14 +5,14 @@ import { fileURLToPath } from "url";
 async function setupTailwind(targetDir) {
     console.log("Setting up Tailwind CSS...");
     try {
-        execSync("npm install", { stdio: "inherit" });
+        execSync("npm install", { stdio: "ignore" });
         console.log("Setup Tailwind complete");
     }
     catch (error) {
         console.error("Failed to install dependencies:", error);
         process.exit(1);
     }
-    execSync("npx tailwindcss init -p", { stdio: "inherit" });
+    execSync("npx tailwindcss init -p", { stdio: "ignore" });
     // Update Tailwind config file
     const tailwindConfigPath = path.join(targetDir, "tailwind.config.js");
     const tailwindConfig = await fs.readFile(tailwindConfigPath, "utf-8");

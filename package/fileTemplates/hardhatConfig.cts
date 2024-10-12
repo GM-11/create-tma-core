@@ -15,10 +15,10 @@ const config: HardhatUserConfig = {
     },
   },
   solidity: {
-    version: "0.8.24",
+    version: "0.8.27",
     compilers: [
       {
-        version: "0.8.24",
+        version: "0.8.27",
         settings: {
           evmVersion: "paris",
           optimizer: {

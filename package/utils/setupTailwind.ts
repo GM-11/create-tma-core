@@ -8,7 +8,7 @@ async function setupTailwind(targetDir: string) {
   console.log("Setting up Tailwind CSS...");
 
   try {
-    execSync("npm install", { stdio: "inherit" });
+    execSync("npm install", { stdio: "ignore" });
 
     console.log("Setup Tailwind complete");
   } catch (error) {
@@ -16,7 +16,7 @@ async function setupTailwind(targetDir: string) {
     process.exit(1);
   }
 
-  execSync("npx tailwindcss init -p", { stdio: "inherit" });
+  execSync("npx tailwindcss init -p", { stdio: "ignore" });
 
   // Update Tailwind config file
   const tailwindConfigPath = path.join(targetDir, "tailwind.config.js");

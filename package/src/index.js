@@ -15,7 +15,6 @@ program
     .argument("[project-name]", "Name of the new project")
     .action(async (projectName) => {
     if (!projectName) {
-        // Ask for project name if not provided
         const response = await prompts({
             type: "text",
             name: "name",
@@ -46,25 +45,19 @@ program
         console.log("Generating project");
         await fs.copy(templateDir, targetDir);
         console.log("Project generated successfully");
-        // const packageJsonPath = path.join(targetDir, "package.json");
-        // console.log(packageJsonPath);
-        // const packageJson = await fs.readJSON(packageJsonPath);
-        // packageJson.name = projectName;
-        // await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
         process.chdir(targetDir);
-        // console.log("Installing dependencies...");
-        // try {
-        //   execSync("npm install", { stdio: "ignore" });
-        // } catch (error) {
-        //   console.error("Failed to install dependencies:", error);
-        //   process.exit(1);
-        // }
         if (useTailwind) {
-            await setupTailwind(targetDir); // Call the Tailwind setup function
+            await setupTailwind(targetDir);
         }
         if (generateSolidity) {
             await setupSolidity(targetDir, projectName);
         }
+        console.log("\nSetup complete\n");
+        console.log("Start your project with:");
+        console.log(`cd ${projectName}`);
+        console.log("npm install");
+        console.log("npm run dev");
+        console.log("A bot folder has been created. Go to BotFather in Telegram and get your bot token.");
     }
     catch (error) {
         console.log(`Error: ${error}`);

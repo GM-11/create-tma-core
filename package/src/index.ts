@@ -10,7 +10,6 @@ import { exec, execSync } from "child_process";
 import { fileURLToPath } from "url";
 
 import setupTailwind from "../utils/setupTailwind.js";
-import setupTact from "../utils/setupTact.js";
 import setupSolidity from "../utils/setupSolidity.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -70,7 +69,12 @@ program
       console.log("\nSetup complete\n");
       console.log("Start your project with:");
       console.log(`cd ${projectName}`);
+      console.log("npm install");
       console.log("npm run dev");
+
+      console.log(
+        "A bot folder has been created. Go to BotFather in Telegram and get your bot token.",
+      );
     } catch (error) {
       console.log(`Error: ${error}`);
       process.exit(1);
