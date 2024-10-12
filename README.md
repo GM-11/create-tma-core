@@ -35,7 +35,3 @@ You can use the following NPM scripts to manage and build your project:
 1. **`npm run compile`**: Compiles all your smart contracts.
 2. **`npm run dev`**: Launches your Telegram Mini App locally.
 3. **`npm run build`**: Builds and deploys your smart contracts on the Core Testnet.
-
----
-
-This format keeps the information clear and professional while enhancing readability.
