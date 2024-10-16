@@ -1,7 +1,7 @@
 import express from "express";
 import { Telegraf } from "telegraf";
 
-const BOT_TOKEN = process.env.BOT_TOKEN;
+const BOT_TOKEN = process.env.BOT_TOKEN || "";
 
 if (!BOT_TOKEN) {
   throw new Error("BOT_TOKEN is not set");
@@ -11,7 +11,7 @@ const bot = new Telegraf(BOT_TOKEN);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {});
+app.get("/", (req, res) => { });
 
 bot.start((ctx) => {
   ctx.reply("Open the mini app", {
