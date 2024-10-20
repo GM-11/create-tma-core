@@ -118,4 +118,4 @@ To test your Telegram Mini App, follow these steps:
 
 6. **Launch the Bot**: Start your bot to see the Mini App in action within Telegram.
 
-By following these steps, you'll successfully compile and deploy your smart contracts, and have your Telegram Mini App up and running for testing and user interaction.
+By following these steps, you'll successfully compile and deploy your smart contracts, and have your Telegram Mini App up and running for testing.
