@@ -6,21 +6,16 @@
 
 Before getting started, ensure you have the following software and tools installed:
 
-- **Git**: Version 2.43.0 or higher
-  [Download Git](https://git-scm.com/downloads)
-- **Node.js**: Version 22.9.0 or higher
-  [Download Node.js](https://nodejs.org/)
-- **NPM**: Version 10.8.3 or higher (bundled with Node.js)
-  [Learn more about NPM](https://www.npmjs.com/)
-- **Hardhat**: Version 2.22.7
-  [Install Hardhat](https://hardhat.org/getting-started/#installation)
-- **MetaMask**: Web wallet extension with some Core testnet tokens to interact with Core blockchain
-  [Download MetaMask](https://metamask.io/)
-
+- [**Git**](https://git-scm.com/downloads): Version 2.43.0 or higher
+- [**Node.js**](https://nodejs.org/): Version 22.9.0 or higher
+- [**NPM**](https://www.npmjs.com/): Version 10.8.3 or higher (bundled with Node.js)
+- [**Hardhat**](https://hardhat.org/getting-started/#installation): Version 2.22.7
+- [**MetaMask**](https://metamask.io/): Web wallet extension with some Core testnet tokens to interact with Core blockchain
   [Get core testnet tokens](https://scan.test.btcs.network/faucet)
-- **Telegram App**: Required to test your Telegram Mini App
-  [Download Telegram](https://telegram.org/)
-- **Code Editor**: Any modern code editor, such as [VS Code](https://code.visualstudio.com/) or [WebStorm](https://www.jetbrains.com/webstorm/).
+- [**Telegram App**](https://telegram.org/): Required to test your Telegram Mini App
+- [**VS Code**](https://code.visualstudio.com/): Code editor with extensions for Solidity and Hardhat
+- [**Vercel CLI**](https://vercel.com/docs/cli): Command-line interface for deploying TMA to Vercel
+- [**Ngrok**](https://ngrok.com/): A proxy to test our bot server on telegram.
 
 ### Installation & Setup
 
@@ -56,10 +51,71 @@ To use your Telegram Mini App, you'll need to register a bot on Telegram:
 3. Follow the instructions to name your bot and create a unique username for it.
 4. After registration, BotFather will provide you with an API token. Keep this token secure; you'll need it to configure your bot in the project.
 
-### Available Commands
+### Compiling and Deploying Smart Contracts
 
-The following NPM scripts are available for managing and building your project:
+To compile the smart contracts, execute the following command:
 
-1. **`npm run compile`**: Compiles all your smart contracts.
-2. **`npm run dev`**: Launches your Telegram Mini App locally.
-3. **`npm run build`**: Builds and deploys your smart contracts on the Core Testnet.
+```bash
+npm run compile contracts
+```
+
+To deploy the contracts to the Core Testnet, use:
+
+```bash
+npm run deploy contracts
+```
+
+After deployment, you'll find the contract ABIs in the `artifacts` folder. Ensure you securely store the addresses of the deployed contracts for future reference.
+
+### Testing the Telegram Mini App
+
+To test your Telegram Mini App, follow these steps:
+
+1. **Obtain BOT_TOKEN**: Create and register your bot using the [BotFather](https://t.me/@BotFather) to receive a BOT_TOKEN.
+
+2. **Configure Environment**: Add the BOT_TOKEN to the `.env` file in your project's root directory:
+
+   ```
+   BOT_TOKEN=your_bot_token_here
+   ```
+
+3. **Run Bot Server**: Execute the following commands to start the bot server and create a secure tunnel:
+
+   ```bash
+   npm run bot-server
+   ```
+
+   ```bash
+   npm run bot-ngrok
+   ```
+
+   This process utilizes [ngrok](https://ngrok.com/) to create an HTTPS tunnel to your localhost, enabling Telegram to communicate with your bot.
+
+4. **Deploy Mini App**: Deploy your React.js project to Vercel using:
+
+   ```bash
+   npm run deploy app
+   ```
+
+5. **Update Bot Configuration**: In the `bot/index.ts` file, replace `<VERCEL_URL>` with your Vercel deployment URL:
+
+   ```javascript
+   bot.start((ctx) => {
+     ctx.reply("Open the mini app", {
+       reply_markup: {
+         inline_keyboard: [
+           [
+             {
+               text: "Open Mini App",
+               web_app: { url: "https://your-vercel-url.vercel.app" },
+             },
+           ],
+         ],
+       },
+     });
+   });
+   ```
+
+6. **Launch the Bot**: Start your bot to see the Mini App in action within Telegram.
+
+By following these steps, you'll successfully compile and deploy your smart contracts, and have your Telegram Mini App up and running for testing and user interaction.
