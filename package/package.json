@@ -1,5 +1,5 @@
 {
-  "name": "create-core-tma",
+  "name": "create-tma-core",
   "version": "0.0.1",
   "main": "./dist/index.js",
   "scripts": {
