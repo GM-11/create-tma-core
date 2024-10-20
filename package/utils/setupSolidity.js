@@ -40,8 +40,10 @@ export default async function setupSolidity(targetDir) {
         const packageJson = await fs.readJson(packageJsonPath);
         packageJson.scripts = {
             ...packageJson.scripts,
-            compile: "npx hardhat compile",
-            build: "npx hardhat ignition deploy ./scripts/deploy.ts --network core_testnet",
+            "compile contracts": "npx hardhat compile",
+            "deploy contracts": "npx hardhat ignition deploy ./scripts/deploy.ts --network core_testnet",
+            "deploy app": "vercel",
+            "start bot-server": "cd bot && npm run start && ngrok http 3000 && cd ..",
         };
         await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
     }
