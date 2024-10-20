@@ -1,19 +1,25 @@
 import fs from "fs-extra";
 import path, { dirname } from "path";
-import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 
-export default async function setupSolidity(
-  targetDir: string,
-  projectName: string,
-) {
+export default async function setupSolidity(targetDir: string) {
   console.log("Setting up Solidity contracts...");
 
   try {
-    execSync(
-      "npm install hardhat @nomicfoundation/hardhat-toolbox --save-dev",
-      { stdio: "ignore" },
-    );
+    const packageJsonPath = path.join(targetDir, "package.json");
+
+    try {
+      const packageJson = await fs.readJson(packageJsonPath);
+
+      packageJson.dependencies = {
+        ...packageJson.dependencies,
+        "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+        hardhat: "^2.17.0",
+      };
+      await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
+    } catch (error) {
+      console.log(error);
+    }
 
     console.log("Setup Hardhat configuration for solidity complete");
   } catch (error) {
@@ -54,8 +60,11 @@ export default async function setupSolidity(
     packageJson.scripts = {
       ...packageJson.scripts,
       compile: "npx hardhat compile",
-      build: "npx hardhat ignition deploy ./scripts/deploy.ts --network core_testnet",
+      build:
+        "npx hardhat ignition deploy ./scripts/deploy.ts --network core_testnet",
     };
     await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
-  } catch (error) { }
+  } catch (error) {
+    console.log(error);
+  }
 }

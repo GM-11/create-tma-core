@@ -5,7 +5,6 @@ import path, { dirname } from "path";
 const program = new Command();
 import prompts from "prompts";
 import * as fs from "fs-extra";
-import { exec, execSync } from "child_process";
 
 import { fileURLToPath } from "url";
 
@@ -55,7 +54,7 @@ program
         await setupTailwind(targetDir);
       }
 
-      await setupSolidity(targetDir, projectName);
+      await setupSolidity(targetDir);
 
       console.log("\nSetup complete\n");
       console.log("Start your project with:");

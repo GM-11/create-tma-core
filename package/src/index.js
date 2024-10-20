@@ -43,7 +43,7 @@ program
         if (useTailwind) {
             await setupTailwind(targetDir);
         }
-        await setupSolidity(targetDir, projectName);
+        await setupSolidity(targetDir);
         console.log("\nSetup complete\n");
         console.log("Start your project with:");
         console.log(`cd ${projectName}`);
