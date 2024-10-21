@@ -56,13 +56,13 @@ To use your Telegram Mini App, you'll need to register a bot on Telegram:
 To compile the smart contracts, execute the following command:
 
 ```bash
-npm run compile contracts
+npm run compile-contracts
 ```
 
 To deploy the contracts to the Core Testnet, use:
 
 ```bash
-npm run deploy contracts
+npm run deploy-contracts
 ```
 
 After deployment, you'll find the contract ABIs in the `artifacts` folder. Ensure you securely store the addresses of the deployed contracts for future reference.
@@ -94,7 +94,7 @@ To test your Telegram Mini App, follow these steps:
 4. **Deploy Mini App**: Deploy your React.js project to Vercel using:
 
    ```bash
-   npm run deploy app
+   npm run deploy-app
    ```
 
 5. **Update Bot Configuration**: In the `bot/index.ts` file, replace `<VERCEL_URL>` with your Vercel deployment URL:
