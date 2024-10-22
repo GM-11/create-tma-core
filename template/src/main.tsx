@@ -25,18 +25,18 @@ createRoot(document.getElementById("root")!).render(
   </StrictMode>,
 );
 
-function Root() {
-  // createAppKit({
-  //   adapters: [new EthersAdapter()],
-  //   networks: [coreDao],
-  //   metadata: {
-  //     name: "Ton + Core starter",
-  //     description: "AppKit Example",
-  //     url: "https://reown.com/appkit", // origin must match your domain & subdomain
-  //     icons: ["https://assets.reown.com/reown-profile-pic.png"],
-  //   },
-  //   projectId: "7594a316c1c467100dafe6fe766c3914",
-  // });
+// function Root() {
+//   // createAppKit({
+//   //   adapters: [new EthersAdapter()],
+//   //   networks: [coreDao],
+//   //   metadata: {
+//   //     name: "Ton + Core starter",
+//   //     description: "AppKit Example",
+//   //     url: "https://reown.com/appkit", // origin must match your domain & subdomain
+//   //     icons: ["https://assets.reown.com/reown-profile-pic.png"],
+//   //   },
+//   //   projectId: "7594a316c1c467100dafe6fe766c3914",
+//   // });
 
-  return <App />;
-}
+//   return <App />;
+// }
