@@ -2,9 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { createAppKit } from "@reown/appkit/react";
-import { EthersAdapter } from "@reown/appkit-adapter-ethers";
-import { coreDao } from "@reown/appkit/networks";
+// import { createAppKit } from "@reown/appkit/react";
+// import { EthersAdapter } from "@reown/appkit-adapter-ethers";
+// import { coreDao } from "@reown/appkit/networks";
 import { MetaMaskProvider } from "@metamask/sdk-react";
 
 createRoot(document.getElementById("root")!).render(
