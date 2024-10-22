@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 
 import setupTailwind from "../utils/setupTailwind.js";
 import setupSolidity from "../utils/setupSolidity.js";
+import { execSync } from "child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -37,24 +38,27 @@ program
 
     const templateDir = path.join(__dirname, "../../template");
 
-    const { useTailwind } = await prompts({
-      type: "confirm",
-      name: "useTailwind",
-      message: "Do you want to use Tailwind CSS?",
-      initial: true,
-    });
+    // const { useTailwind } = await prompts({
+    //   type: "confirm",
+    //   name: "useTailwind",
+    //   message: "Do you want to use Tailwind CSS?",
+    //   initial: true,
+    // });
 
     try {
       console.log("Generating project");
       await fs.copy(templateDir, targetDir);
       console.log("Project generated successfully");
 
-      process.chdir(targetDir);
-      if (useTailwind) {
-        await setupTailwind(targetDir);
-      }
+      // process.chdir(targetDir);
+      // if (useTailwind) {
+      //   await setupTailwind(targetDir);
+      // }
 
       await setupSolidity(targetDir);
+
+      process.chdir(targetDir);
+      execSync(`git init && git add . git commit -m "init" `);
 
       console.log("\nSetup complete\n");
       console.log("Start your project with:");
