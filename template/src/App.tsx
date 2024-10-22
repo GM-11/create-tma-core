@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const App: React.FC = () => {
   const [account, setAccount] = useState<string>();
-  const { sdk, connected, connecting, provider, chainId } = useSDK();
+  const { sdk, connected, chainId } = useSDK();
 
   const connect = async () => {
     try {
