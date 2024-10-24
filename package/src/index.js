@@ -5,8 +5,8 @@ const program = new Command();
 import prompts from "prompts";
 import * as fs from "fs-extra";
 import { fileURLToPath } from "url";
-import setupTailwind from "../utils/setupTailwind.js";
 import setupSolidity from "../utils/setupSolidity.js";
+import { execSync } from "child_process";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 program
@@ -29,21 +29,33 @@ program
         process.exit(1);
     }
     const templateDir = path.join(__dirname, "../../template");
-    const { useTailwind } = await prompts({
-        type: "confirm",
-        name: "useTailwind",
-        message: "Do you want to use Tailwind CSS?",
-        initial: true,
-    });
+    // const { useTailwind } = await prompts({
+    //   type: "confirm",
+    //   name: "useTailwind",
+    //   message: "Do you want to use Tailwind CSS?",
+    //   initial: true,
+    // });
     try {
         console.log("Generating project");
         await fs.copy(templateDir, targetDir);
         console.log("Project generated successfully");
-        process.chdir(targetDir);
-        if (useTailwind) {
-            await setupTailwind(targetDir);
-        }
+        // process.chdir(targetDir);
+        // if (useTailwind) {
+        //   await setupTailwind(targetDir);
+        // }
         await setupSolidity(targetDir);
+        process.chdir(targetDir);
+        const githubUsername = execSync("git config --global user.name")
+            .toString()
+            .trim();
+        if (githubUsername) {
+            const repoUrl = `https://github.com/${githubUsername}/${projectName}.git`;
+            execSync("git init", { stdio: "ignore" });
+            execSync("git add .", { stdio: "ignore" });
+            execSync(`git commit -m "init"`, { stdio: "ignore" });
+            execSync(`git remote add origin ${repoUrl}`, { stdio: "ignore" });
+            execSync("git branch -M main", { stdio: "ignore" });
+        }
         console.log("\nSetup complete\n");
         console.log("Start your project with:");
         console.log(`cd ${projectName}`);

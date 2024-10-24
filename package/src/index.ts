@@ -58,7 +58,16 @@ program
       await setupSolidity(targetDir);
 
       process.chdir(targetDir);
-      execSync(`git init && git add . git commit -m "init" `);
+      const githubUsername = execSync("git config --global user.name")
+        .toString()
+        .trim();
+      if (githubUsername) {
+        execSync("git init", { stdio: "ignore" });
+        execSync("git add .", { stdio: "ignore" });
+        execSync(`git commit -m "init"`, { stdio: "ignore" });
+
+        console.log("Git initialized");
+      }
 
       console.log("\nSetup complete\n");
       console.log("Start your project with:");
