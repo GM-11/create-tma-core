@@ -49,12 +49,10 @@ program
             .toString()
             .trim();
         if (githubUsername) {
-            const repoUrl = `https://github.com/${githubUsername}/${projectName}.git`;
             execSync("git init", { stdio: "ignore" });
             execSync("git add .", { stdio: "ignore" });
             execSync(`git commit -m "init"`, { stdio: "ignore" });
-            execSync(`git remote add origin ${repoUrl}`, { stdio: "ignore" });
-            execSync("git branch -M main", { stdio: "ignore" });
+            console.log("Git initialized");
         }
         console.log("\nSetup complete\n");
         console.log("Start your project with:");
