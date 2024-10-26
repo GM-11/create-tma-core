@@ -50,9 +50,9 @@ export default async function setupSolidity(targetDir: string) {
 
   const deployTsPath = path.join(
     dirname(fileURLToPath(import.meta.url)),
-    "../fileTemplates/deploy.ts",
+    "../fileTemplates/deploy.cjs",
   );
-  await fs.copy(deployTsPath, path.join(targetDir, "scripts/deploy.ts"));
+  await fs.copy(deployTsPath, path.join(targetDir, "scripts/deploy.cjs"));
 
   const packageJsonPath = path.join(targetDir, "package.json");
   try {
