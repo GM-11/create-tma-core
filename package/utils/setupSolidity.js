@@ -32,7 +32,7 @@ export default async function setupSolidity(targetDir) {
     fs.writeFile(path.join(targetDir, "hardhat.config.cts"), "");
     await fs.copy(hardhatConfigPath, path.join(targetDir, "hardhat.config.cts"));
     await fs.mkdir(path.join(targetDir, "scripts"));
-    await fs.writeFile(path.join(targetDir, "scripts/deploy.ts"), "");
+    await fs.writeFile(path.join(targetDir, "scripts/deploy.cjs"), "");
     const deployTsPath = path.join(dirname(fileURLToPath(import.meta.url)), "../fileTemplates/deploy.ts");
     await fs.copy(deployTsPath, path.join(targetDir, "scripts/deploy.ts"));
     const packageJsonPath = path.join(targetDir, "package.json");
