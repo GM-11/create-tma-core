@@ -16,14 +16,13 @@ Before getting started, ensure you have the following software and tools install
 - [**VS Code**](https://code.visualstudio.com/): Code editor with extensions for Solidity and Hardhat
 - [**Vercel CLI**](https://vercel.com/docs/cli): Command-line interface for deploying TMA to Vercel
 - [**Ngrok**](https://ngrok.com/): A proxy to test our bot server on telegram.
-- [**Vercel CLI**](https://vercel.com/docs/cli): Command-line interface for deploying TMA to Vercel
 
 ### Installation & Setup
 
 To generate a new project, run the following command in your terminal:
 
 ```bash
-npx create-core-tma
+npx create-tma-core
 ```
 
 You will be prompted to:
