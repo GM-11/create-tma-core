@@ -61,7 +61,7 @@ export default async function setupSolidity(targetDir: string) {
       ...packageJson.scripts,
       "compile-contracts": "npx hardhat compile",
       "deploy-contracts":
-        "npx hardhat ignition deploy ./scripts/deploy.ts --network core_testnet",
+        "npx hardhat run ./scripts/deploy.cjs --network core_testnet",
       "deploy-app": "vercel --prod",
       "bot-server": "cd bot && npm run start",
       "bot-ngrok": "cd bot && ngrok http 3000",

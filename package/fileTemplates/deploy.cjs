@@ -9,7 +9,7 @@ async function main() {
   //
   const contract = await ethers.getContractFactory("Template");
   const deployedContract = await contract.deploy();
-  console.log("Contract deployed to: ", deployedContract.address);
+  console.log("Contract deployed to: ", deployedContract.target);
 }
 
 main().catch((error) => {
